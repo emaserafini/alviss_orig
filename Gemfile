@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.1'
 
+# BASE
 gem 'rails', '4.2.0'
 gem 'pg'
 gem 'jbuilder', '~> 2.0'
@@ -18,6 +19,7 @@ group :development, :test do
   gem 'spring'
   gem 'pry'
   gem 'web-console', '~> 2.0'
+  gem 'spring-commands-rspec'
 end
 
 # TEST
