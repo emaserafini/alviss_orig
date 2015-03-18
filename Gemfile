@@ -33,3 +33,6 @@ end
 # HEROKU
 gem 'rails_12factor', group: :production
 gem 'unicorn'
+
+# MONITORING
+gem 'skylight', group: :production
