@@ -6,6 +6,7 @@ ruby '2.2.1'
 gem 'rails', '4.2.0'
 gem 'pg'
 gem 'jbuilder', '~> 2.0'
+gem 'devise'
 
 # ASSETS
 gem 'haml-rails'
