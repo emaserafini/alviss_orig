@@ -1,6 +1,6 @@
 ---
 # The Skylight ID for the application.
-application: GTR_qyd-nbgy
+application: ENV['SKYLIGHT_APPLICATION']
 
 # The authentication token for the application.
-authentication: XXsJ9bxZZw93xQePZBZdQhywKMJR1JJUZWEazVVMbBI
+authentication: ENV['SKYLIGHT_AUTHENTICATION']
