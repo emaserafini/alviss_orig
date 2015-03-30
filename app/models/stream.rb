@@ -8,6 +8,20 @@ class Stream < ActiveRecord::Base
 
   before_validation :generate_identity_token, unless: :identity_token?
   before_validation :generate_access_token, unless: :access_token?
+  before_destroy :delete_datapoints!
+
+  def datapoint_class
+    "datapoint/#{kind}".camelize.constantize
+  end
+
+  def datapoints
+    datapoint_class.of_stream(id)
+  end
+
+  def delete_datapoints!
+    datapoint_class.destroy_all stream_id: id
+  end
+
 
   private
 
