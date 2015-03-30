@@ -22,6 +22,7 @@ group :development, :test do
   gem 'pry'
   gem 'web-console', '~> 2.0'
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec-collection_matchers'
   gem 'spring-commands-rspec'
 end
 

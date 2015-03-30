@@ -145,6 +145,8 @@ GEM
     rake (10.4.2)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rspec-collection_matchers (1.1.2)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -222,6 +224,7 @@ DEPENDENCIES
   pry
   rails (= 4.2.0)
   rails_12factor
+  rspec-collection_matchers
   rspec-rails (~> 3.1.0)
   sass-rails (~> 5.0)
   skylight
