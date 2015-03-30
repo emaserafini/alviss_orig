@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327212453) do
+ActiveRecord::Schema.define(version: 20150330101736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "datapoint_temperatures", force: :cascade do |t|
+    t.integer  "stream_id"
+    t.float    "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "datapoint_temperatures", ["stream_id"], name: "index_datapoint_temperatures_on_stream_id", using: :btree
 
   create_table "streams", force: :cascade do |t|
     t.string   "name"
@@ -51,4 +60,5 @@ ActiveRecord::Schema.define(version: 20150327212453) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "datapoint_temperatures", "streams"
 end
