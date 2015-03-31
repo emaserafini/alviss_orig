@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @stream.name
+%p
+  %b Kind:
+  = @stream.kind
+%p
+  %b Identity token:
+  = @stream.identity_token
+%p
+  %b Access token:
+  = @stream.access_token
+
+= link_to 'Edit', edit_stream_path(@stream)
+\|
+= link_to 'Back', streams_path
