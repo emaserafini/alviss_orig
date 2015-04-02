@@ -1,0 +1,21 @@
+#temp_charts{:style => "width: 560px; height: 300px;"}
+  :javascript
+    $(function() {
+      $('#temp_charts').highcharts('StockChart', {
+        rangeSelector: {
+          selected: 1
+        },
+        title: {
+          text: 'Temperatures'
+        },
+        series: [
+          {
+            name: 'AAPL',
+            data: #{@data},
+            tooltip: {
+              valueDecimals: 1
+            }
+          }
+        ]
+      });
+    });

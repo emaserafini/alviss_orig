@@ -1,5 +1,7 @@
-class WelcomeController < ActionController::Base
+class WelcomeController < ApplicationController
   def index
-    head 200
+    @data = Stream.first.datapoints.map do |datapoint|
+      [datapoint.created_at.to_i, datapoint.value.to_f]
+    end
   end
 end
