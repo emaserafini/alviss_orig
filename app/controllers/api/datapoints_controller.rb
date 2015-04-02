@@ -33,7 +33,7 @@ module API
 
     def authenticate_token
       authenticate_with_http_token do |token, options|
-        Stream.find_by access_token: token
+        stream.access_token == token
       end
     end
 
