@@ -44,7 +44,7 @@ RSpec.describe API::DatapointsController, type: :controller do
 
         it 'returns correct data' do
           result_values = body.map{ |point| point[:value] }
-          stream_values = Datapoint::Temperature.of_stream(stream.id).pluck(:value).map(&:to_s)
+          stream_values = Datapoint::Temperature.of_stream(stream.id).pluck(:value)
           expect(result_values).to eq stream_values
         end
       end
@@ -80,7 +80,7 @@ RSpec.describe API::DatapointsController, type: :controller do
             request.env['HTTP_AUTHORIZATION'] = valid_token
             post :create, { stream_identity_token: stream.identity_token, 'temperature': { 'value': 20 } }
             body = JSON.parse(response.body, symbolize_names: true)
-            expect(body[:value]).to eq '20.0'
+            expect(body[:value]).to eq 20
           end
         end
 
