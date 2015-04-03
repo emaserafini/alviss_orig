@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'ping' => 'ping#index'
 
   resources :streams
+  resources :thermostats
 
   namespace :api do
     resources :streams, param: :identity_token do
