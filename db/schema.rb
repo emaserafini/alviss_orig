@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403094809) do
+ActiveRecord::Schema.define(version: 20150403213539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 20150403094809) do
 
   add_index "streams", ["access_token"], name: "index_streams_on_access_token", unique: true, using: :btree
   add_index "streams", ["identity_token"], name: "index_streams_on_identity_token", unique: true, using: :btree
+
+  create_table "thermostat_mode_manuals", force: :cascade do |t|
+    t.integer  "thermostat_id"
+    t.integer  "stream_temperature_id"
+    t.string   "program"
+    t.float    "setpoint_temperature"
+    t.float    "deviation_temperature"
+    t.integer  "minimum_run"
+    t.datetime "started_at"
+    t.integer  "status"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "thermostat_mode_manuals", ["stream_temperature_id"], name: "index_thermostat_mode_manuals_on_stream_temperature_id", using: :btree
+  add_index "thermostat_mode_manuals", ["thermostat_id"], name: "index_thermostat_mode_manuals_on_thermostat_id", using: :btree
 
   create_table "thermostats", force: :cascade do |t|
     t.string   "name"
@@ -71,4 +87,5 @@ ActiveRecord::Schema.define(version: 20150403094809) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "datapoint_temperatures", "streams"
+  add_foreign_key "thermostat_mode_manuals", "thermostats"
 end
