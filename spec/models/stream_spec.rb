@@ -72,27 +72,53 @@ RSpec.describe Stream, type: :model do
   end
 
   describe '#datapoints' do
-    let(:fake_datapoints) { double of_stream: nil }
+    let(:fake_datapoint) { double of_stream: nil }
     subject { create :stream }
 
     before do
-      allow(subject).to receive(:datapoint_class).and_return fake_datapoints
+      allow(subject).to receive(:datapoint_class).and_return fake_datapoint
     end
 
-    it 'calls #from_stream on datapoint_class' do
-      expect(fake_datapoints).to receive(:of_stream)
+    it 'calls #of_stream on datapoint_class' do
+      expect(fake_datapoint).to receive(:of_stream)
       subject.datapoints
     end
 
-    it "calls #from_stream passing stream's id" do
-      subject.id = 3
-      expect(fake_datapoints).to receive(:of_stream).with(3)
+    it "calls #of_stream passing stream's id" do
+      stream_id = subject.id
+      expect(fake_datapoint).to receive(:of_stream).with stream_id
       subject.datapoints
     end
 
     it 'returns datapoints.of_stream value' do
-      allow(fake_datapoints).to receive(:of_stream).and_return %w[foo bar]
+      allow(fake_datapoint).to receive(:of_stream).and_return %w[foo bar]
       expect(subject.datapoints).to eq %w[foo bar]
     end
+  end
+
+  describe '#latest_datapoint' do
+    let(:fake_datapoint) { double latest_of_stream: nil }
+    subject { create :stream }
+
+    before do
+      allow(subject).to receive(:datapoint_class).and_return fake_datapoint
+    end
+
+    it 'calls #latest_of_stream on datapoint_class' do
+      expect(fake_datapoint).to receive(:latest_of_stream)
+      subject.latest_datapoint
+    end
+
+    it "calls #latest_of_stream passing stream's id an num" do
+      stream_id = subject.id
+      expect(fake_datapoint).to receive(:latest_of_stream).with stream_id, 1
+      subject.latest_datapoint
+    end
+
+    it 'returns datapoints.latest_of_stream value' do
+      allow(fake_datapoint).to receive(:latest_of_stream).and_return 'datapoint'
+      expect(subject.latest_datapoint).to eq 'datapoint'
+    end
+
   end
 end

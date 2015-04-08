@@ -22,6 +22,14 @@ class Stream < ActiveRecord::Base
     datapoint_class.destroy_all stream_id: id
   end
 
+  def latest_datapoint
+    latest_datapoints
+  end
+
+  def latest_datapoints n = 1
+    datapoint_class.latest_of_stream id, n
+  end
+
 
   private
 
