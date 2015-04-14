@@ -13,11 +13,12 @@ class ThermostatMode::Manual < ActiveRecord::Base
   validates :program, inclusion: { in: AVAILABLE_PROGRAMS }
 
   after_initialize :default_values
+  before_update :update_started_at, if: :status_changed?
 
   def default_values
     self.deviation_temperature ||= 0
     self.minimum_run ||= 0
-    self.status ||= 'unknown'
+    self.status ||= :unknown
   end
 
   def current_temperature reload = nil
@@ -41,9 +42,7 @@ class ThermostatMode::Manual < ActiveRecord::Base
   end
 
   def check_current_status
-    self.status = current_status
-    self.started_at = Time.now if status_changed? to: 'on'
-    save
+    update_attributes status: current_status
     status
   end
 
@@ -65,6 +64,14 @@ class ThermostatMode::Manual < ActiveRecord::Base
 
 
   private
+
+  def update_started_at
+    self.started_at = if status_changed? to: 'on'
+      Time.now
+    else
+      nil
+    end
+  end
 
   def heating?
     program == 'heat'

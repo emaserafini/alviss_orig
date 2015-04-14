@@ -159,6 +159,50 @@ RSpec.describe ThermostatMode::Manual, type: :model do
         end
       end
     end
+  end
 
+  describe '#check_current_status' do
+    subject { create :thermostat_mode_manual }
+
+    it 'update status running #current_status' do
+      allow(subject).to receive(:current_status).and_return 'on'
+      subject.check_current_status
+      expect(subject.reload).to be_on
+    end
+
+    it 'returns #current_status value' do
+      allow(subject).to receive(:current_status).and_return 'on'
+      expect(subject.current_status).to eq 'on'
+    end
+
+    context 'when status changed to :on' do
+      %w[off unknown].each do |prev_status|
+        it 'started_at being updated' do
+          subject.update_attributes status: prev_status
+          allow(subject).to receive(:current_status).and_return 'on'
+          expect { subject.check_current_status }.to change subject, :started_at
+        end
+      end
+    end
+
+    context 'when status changed to :off or :unknown' do
+      %w[off unknown].each do |prev_status|
+        it 'started_at being updated with nil' do
+          subject.update_attributes status: :on
+          allow(subject).to receive(:current_status).and_return prev_status
+          expect { subject.check_current_status }.to change(subject, :started_at).to nil
+        end
+      end
+    end
+
+    context 'when status does not changed' do
+      %w[off unknown on].each do |prev_status|
+        it 'started_at not being updated' do
+          subject.update_attributes status: prev_status
+          allow(subject).to receive(:current_status).and_return prev_status
+          expect { subject.check_current_status }.not_to change subject, :started_at
+        end
+      end
+    end
   end
 end
