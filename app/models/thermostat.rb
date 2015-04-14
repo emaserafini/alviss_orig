@@ -1,15 +1,25 @@
 class Thermostat < ActiveRecord::Base
-  enum mode: [ :inactive ]
+  enum mode: [ :inactive, :manual ]
 
   validates :name, presence: true
   validates :mode, presence: true
   validates :identity_token, presence: true
+
+  has_one :manual_mode, class_name: 'ThermostatMode::Manual'
 
   after_initialize :set_default_mode, unless: :mode?
   before_validation :generate_identity_token, unless: :identity_token?
 
   def mode?
     self.mode != nil
+  end
+
+  def inactive_mode
+    @inactive_mode ||= ThermostatMode::Inactive.new
+  end
+
+  def current_mode
+    send "#{mode}_mode"
   end
 
   private
