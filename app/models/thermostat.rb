@@ -18,8 +18,16 @@ class Thermostat < ActiveRecord::Base
     @inactive_mode ||= ThermostatMode::Inactive.new
   end
 
+  def mode_class
+    "thermostat_mode/#{mode}".camelize.constantize
+  end
+
   def current_mode
     send "#{mode}_mode"
+  end
+
+  def available_modes
+    Thermostat.modes.reject { |mode| send("#{mode}_mode").nil? }
   end
 
   private

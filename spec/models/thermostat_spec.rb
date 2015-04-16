@@ -47,4 +47,25 @@ RSpec.describe Thermostat, type: :model do
       end
     end
   end
+
+  describe '#mode_class' do
+    it 'retrurns mode class using mode' do
+      subject.mode = :manual
+      expect(subject.mode_class).to eq ThermostatMode::Manual
+    end
+  end
+
+  describe '#available_modes, returns a list of configured modes for thermostat' do
+    it 'by default returns an hash that includes "inactive"' do
+      expect(subject.available_modes).to include('inactive')
+    end
+
+    context 'when manual is configured' do
+      subject { create :thermostat, :manual_present, mode: :manual }
+
+      it 'returns an hash that includes "manual"' do
+        expect(subject.available_modes).to include('manual')
+      end
+    end
+  end
 end

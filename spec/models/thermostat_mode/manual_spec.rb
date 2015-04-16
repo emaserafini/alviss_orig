@@ -78,7 +78,7 @@ RSpec.describe ThermostatMode::Manual, type: :model do
   end
 
   describe '#current_status' do
-    subject { create :thermostat_mode_manual }
+    subject { create :manual_mode }
 
     context 'when #current_temperature is nil' do
       it 'returns unknown' do
@@ -106,7 +106,7 @@ RSpec.describe ThermostatMode::Manual, type: :model do
   end
 
   describe '#status_from_temperatures' do
-    subject { create :thermostat_mode_manual }
+    subject { create :manual_mode }
 
     before { allow(subject).to receive(:current_temperature).and_return 21.1 }
 
@@ -162,7 +162,7 @@ RSpec.describe ThermostatMode::Manual, type: :model do
   end
 
   describe '#check_current_status' do
-    subject { create :thermostat_mode_manual }
+    subject { create :manual_mode }
 
     it 'update status running #current_status' do
       allow(subject).to receive(:current_status).and_return 'on'
