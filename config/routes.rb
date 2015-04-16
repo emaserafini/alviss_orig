@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :streams, param: :identity_token do
       resources :datapoints, only: [:index, :create]
     end
+    get 'raw_thermostats/:thermostat_identity_token/current_status' => 'raw_thermostat#current_status'
   end
 
   # Example of regular route:

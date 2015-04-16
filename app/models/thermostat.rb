@@ -26,6 +26,10 @@ class Thermostat < ActiveRecord::Base
     send "#{mode}_mode"
   end
 
+  def current_status update = true
+    update ? current_mode.check_current_status : current_mode.status
+  end
+
   def available_modes
     Thermostat.modes.reject { |mode| send("#{mode}_mode").nil? }
   end
