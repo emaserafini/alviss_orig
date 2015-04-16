@@ -23,7 +23,7 @@ class Stream < ActiveRecord::Base
   end
 
   def latest_datapoint
-    latest_datapoints
+    latest_datapoints.last
   end
 
   def latest_datapoints n = 1
