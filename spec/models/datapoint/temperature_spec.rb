@@ -16,4 +16,14 @@ RSpec.describe Datapoint::Temperature, type: :model do
       expect(subject).to be_valid
     end
   end
+
+  context 'scopes' do
+    describe '::recent' do
+      subject { create :temperature }
+
+      it 'returns latest data created in the last five minutes' do
+        expect(described_class.recent).to eq [subject]
+      end
+    end
+  end
 end
