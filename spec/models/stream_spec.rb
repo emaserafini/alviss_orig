@@ -119,6 +119,24 @@ RSpec.describe Stream, type: :model do
       allow(fake_datapoint).to receive(:latest_of_stream).and_return 'datapoint'
       expect(subject.latest_datapoint).to eq 'datapoint'
     end
+  end
 
+  describe '#current_datapoint' do
+    let(:fake_datapoint) { double current_of_stream: nil }
+    subject { create :stream }
+
+    before do
+      allow(subject).to receive(:datapoint_class).and_return fake_datapoint
+    end
+
+    it 'returns nil when ' do
+
+    end
+
+    it "calls #current_of_stream passing stream's id" do
+      stream_id = subject.id
+      expect(fake_datapoint).to receive(:current_of_stream).with stream_id
+      subject.current_datapoint
+    end
   end
 end

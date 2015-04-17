@@ -31,8 +31,7 @@ class Stream < ActiveRecord::Base
   end
 
   def current_datapoint
-    # to be implemented
-    latest_datapoint
+    datapoint_class.current_of_stream id
   end
 
 
