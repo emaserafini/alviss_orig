@@ -7,6 +7,7 @@ gem 'rails', '4.2.0'
 gem 'pg'
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
+gem 'tod'
 
 # ASSETS
 gem 'haml-rails'
