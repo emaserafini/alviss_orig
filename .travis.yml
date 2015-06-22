@@ -13,6 +13,7 @@ script:
   - bundle exec rake db:test:prepare
   - bundle exec rake
 addons:
+  postgresql: '9.4'
   code_climate:
     repo_token:
       secure: x19NL9LFYasCWDKK1U32mnyilW0p2bFlhHvfpmG8/e9H5QNc583L2mrnHC0J3b/WypewFWTwpZVDIPIzQdFEcS8+krcb+uiXvlHWk7BoahY1kMgQmyzKNZMTmlcqvbulwLjpQa5jZ8JkHeZhQO5ZkjiSaDjV6fxvsD1vwVO8qNdAmeiISYcMdpTleNlm3L+cR565aRjUqJo/rCZsDVW3VCKiQGPTU/evbfVktupM+dw+hRqTk4v/NQOljig6H5E5L3Sh6M4W4iAH0s1OcvSMQdky4bNPkx6CLWhzCT64P4vOZvXxJXJRjG2BW/g9oESItLRxxcgDltOkcXba5igR+B4E09escO6gcdO+qLUt7MPbrtc2/voLXd5YSLY//IG7FIg5mVTrIpC+WeAwNFe+2CLIGZIvesU9lV+dSvkvJdmDy/AYZLxsU36mt4KtnGQGgvYrM5u5xCKlZrXT2a5StIpsr8NfiXxBehb6qcnnhkW0cxeCU0fRS6R4a0mabgjPffSpgvzE+CKJuf820mQGOex6pizDe9p0mriFTnzl3DjvaDf0rCRB1ece6WPqc3W1oqkBTypbGPyEq7wJZ5rPJUxeYckjBbVH8v+ZWDOAIjYW5wgf2XPx41KR+1NJlnyCwkDLeyL69604OtckugKUkaCx/iYECGM0mVcxqZjE81o=
