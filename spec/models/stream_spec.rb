@@ -105,17 +105,20 @@ RSpec.describe Stream, type: :model do
     end
 
     it 'calls #latest_of_stream on datapoint_class' do
+      pending
       expect(fake_datapoint).to receive(:latest_of_stream)
       subject.latest_datapoint
     end
 
     it "calls #latest_of_stream passing stream's id an num" do
+      pending
       stream_id = subject.id
       expect(fake_datapoint).to receive(:latest_of_stream).with stream_id, 1
       subject.latest_datapoint
     end
 
     it 'returns datapoints.latest_of_stream value' do
+      pending
       allow(fake_datapoint).to receive(:latest_of_stream).and_return 'datapoint'
       expect(subject.latest_datapoint).to eq 'datapoint'
     end
